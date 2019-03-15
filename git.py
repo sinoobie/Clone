@@ -11,10 +11,13 @@ print("""
  /__  |   |    /  |  / \ |\ | |_ 
  \_| _|_  |    \_ |_ \_/ | \| |_ 
                                  """)
-u=input("[!] input username github: ")
-print()
-re=get('https://api.github.com/users/'+u+'/repos')
-a=json.loads(re.text)
+try:
+	u=input("[!] input username github: ")
+	print()
+	re=get('https://api.github.com/users/'+u+'/repos')
+	a=json.loads(re.text)
+except Exception as ef:
+	exit("[Err] %s"%(ef))
 
 items = []
 try:
@@ -23,6 +26,8 @@ try:
 except TypeError: exit("[!] username tidak ada")
 
 s=len(items)
+if s == 0:
+	exit("[!] username tersebut tidak memiliki repostory apapun")
 c=int(1)
 while c < s:
 	for i in range(len(items)):
@@ -34,4 +39,4 @@ try:
 	sp.call('mv '+str(items[asu-1])+' ..',shell=True,stdout=sp.DEVNULL, stderr=sp.STDOUT)
 	print("[!] success installed",items[asu-1])
 	print("[!] check the folder type 'cd'")
-except (IndexError,ValueError): print("[?] anda waras")
+except Exception as F: exit("[?: anda waras] %s"%(F))
