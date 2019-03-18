@@ -43,7 +43,7 @@ while c < s:
 		c+=1
 try:
 	asu=int(input("\n[?] Clone yang mana: "))
-	if asu == 0:
+	if asu <= 0:
 		exit("[?] anda waras")
 	os.system('git clone https://github.com/'+u+'/'+items[asu-1])
 	sp.call('mv '+str(items[asu-1])+' ..',shell=True,stdout=sp.DEVNULL, stderr=sp.STDOUT)
